@@ -1,3 +1,11 @@
+conf_data = configuration_data()
+cxx = meson.get_compiler('cpp')
+conf_data.set10('HAS_GET_CURRENT_DIR_NAME',
+    cxx.has_function('get_current_dir_name', prefix : '#include <unistd.h>'))
+configure_file(input: 'tests_config.h.in',
+               output: 'tests_config.h',
+               configuration: conf_data)
+
 types_test = executable(
     'types_test',
     'types_test.cpp',

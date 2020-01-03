@@ -6,9 +6,19 @@
 #include <iostream>
 #include <fstream>
 
+#include "tests_config.h"
 #include <wayfire/config/file.hpp>
 #include <wayfire/util/log.hpp>
 #include <wayfire/config/types.hpp>
+
+#if !HAS_GET_CURRENT_DIR_NAME
+#include <limits.h>
+char *get_current_dir_name() {
+    char *result = (char*)malloc(PATH_MAX + 1);
+    getcwd(result, PATH_MAX);
+    return result;
+}
+#endif
 
 const std::string contents = R"(
 illegal_option = value
