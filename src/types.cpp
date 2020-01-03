@@ -47,7 +47,7 @@ template<> stdx::optional<double>
     in >> result;
     std::locale::global(old);
 
-    if (!in.eof() || value.empty())
+    if (!in.eof() || value.empty() || in.fail())
     {
         /* XXX: is the check above enough??? Overflow? Underflow? */
         return {};
